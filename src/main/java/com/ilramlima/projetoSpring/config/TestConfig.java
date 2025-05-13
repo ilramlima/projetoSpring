@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.ilramlima.projetoSpring.entities.Categoria;
 import com.ilramlima.projetoSpring.entities.Pedido;
 import com.ilramlima.projetoSpring.entities.Usuario;
 import com.ilramlima.projetoSpring.entities.enums.StatusPedido;
+import com.ilramlima.projetoSpring.repository.CategoriaRepository;
 import com.ilramlima.projetoSpring.repository.PedidoRepository;
 import com.ilramlima.projetoSpring.repository.UsuarioRepository;
 
@@ -19,6 +21,9 @@ import com.ilramlima.projetoSpring.repository.UsuarioRepository;
 @Profile("test")
 public class TestConfig implements CommandLineRunner{
 
+	@Autowired
+	private CategoriaRepository categoriaRepository;
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
@@ -35,7 +40,12 @@ public class TestConfig implements CommandLineRunner{
 		Pedido o2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), StatusPedido.AGUARDANDO_PAGAMENTO, u2);
 		Pedido o3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), StatusPedido.AGUARDANDO_PAGAMENTO, u1);
 		
+		Categoria cat2 = new Categoria(null, "Books");
+		Categoria cat3 = new Categoria(null, "Computers");
+		Categoria cat1 = new Categoria(null, "Electronics");
+		
 		usuarioRepository.saveAll(Arrays.asList(u1, u2));
 		pedidoRepository.saveAll(Arrays.asList(o1, o2, o3));
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 	}
 }

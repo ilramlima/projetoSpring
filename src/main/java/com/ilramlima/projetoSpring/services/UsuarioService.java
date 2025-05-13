@@ -28,8 +28,6 @@ public class UsuarioService {
 		
 		Optional<Usuario> usuario = repository.findById(id);
 		
-		Usuario entidade = usuario.get();
-		
-		return entidade;
+		return usuario.get();
 	}
 }

@@ -29,8 +29,7 @@ public class PedidoService {
 		
 		Optional<Pedido> pedido = repository.findById(id);
 		
-		Pedido entidade = pedido.get();
+		return pedido.get();		
 		
-		return entidade;
 	}
 }
