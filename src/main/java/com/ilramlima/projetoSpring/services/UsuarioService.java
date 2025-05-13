@@ -24,7 +24,7 @@ public class UsuarioService {
 	}
 	
 	
-	public Usuario buscarPorId(long id) {
+	public Usuario buscarPorId(Long id) {
 		
 		Optional<Usuario> usuario = repository.findById(id);
 		
