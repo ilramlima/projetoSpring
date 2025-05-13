@@ -9,6 +9,7 @@ import org.hibernate.annotations.IdGeneratorType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+import com.ilramlima.projetoSpring.entities.enums.StatusPedido;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +32,7 @@ public class Pedido implements Serializable{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant dataPedido;
 	
+	private Integer statusDoPedido;
 	
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
@@ -38,10 +40,11 @@ public class Pedido implements Serializable{
 
 	public Pedido() {};
 	
-	public Pedido(Long id, Instant dataPedido, Usuario cliente) {
+	public Pedido(Long id, Instant dataPedido, StatusPedido statusDoPedido, Usuario cliente) {
 		
 		this.id = id;
 		this.dataPedido = dataPedido;
+		setStatusDoPedido(statusDoPedido);
 		this.cliente = cliente;
 	}
 
@@ -59,6 +62,14 @@ public class Pedido implements Serializable{
 
 	public void setDataPedido(Instant dataPedido) {
 		this.dataPedido = dataPedido;
+	}
+	
+	public StatusPedido getStatusDoPedido() {
+		return StatusPedido.valueOf(this.statusDoPedido);
+	}
+	
+	public void setStatusDoPedido(StatusPedido statusDoPedido) {
+		this.statusDoPedido = statusDoPedido.getCode();
 	}
 
 	public Usuario getCliente() {
