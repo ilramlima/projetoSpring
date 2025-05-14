@@ -23,9 +23,9 @@ public class PedidoResources {
 	@GetMapping
 	public ResponseEntity<List<Pedido>> buscarTodos(){
 		
-		List<Pedido> lista = service.buscarTodos();
+		List<Pedido> pedidos = service.buscarTodos();
 		
-		return ResponseEntity.ok().body(lista);
+		return ResponseEntity.ok().body(pedidos);
 	}
 	
 	

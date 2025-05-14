@@ -23,9 +23,9 @@ public class CategoriaResources {
 	@GetMapping
 	public ResponseEntity<List<Categoria>> buscarTodos(){
 		
-		List<Categoria> lista = service.buscarTodos();
+		List<Categoria> categorias = service.buscarTodos();
 		
-		return ResponseEntity.ok().body(lista);
+		return ResponseEntity.ok().body(categorias);
 	}
 	
 	@GetMapping(value = "/{id}")

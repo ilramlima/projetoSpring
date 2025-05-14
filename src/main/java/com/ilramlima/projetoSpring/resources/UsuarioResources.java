@@ -25,17 +25,17 @@ public class UsuarioResources {
 	@GetMapping
 	public ResponseEntity<List<Usuario>> buscarTodos(){
 		
-		List<Usuario> lista = service.buscarTodos();
+		List<Usuario> usuarios = service.buscarTodos();
 		
-		return ResponseEntity.ok().body(lista);
+		return ResponseEntity.ok().body(usuarios);
 		
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Usuario> buscarPorId(@PathVariable long id) {
 		
-		Usuario entidade = service.buscarPorId(id);
+		Usuario usuario = service.buscarPorId(id);
 		
-		return ResponseEntity.ok().body(entidade);
+		return ResponseEntity.ok().body(usuario);
 	}
 }
