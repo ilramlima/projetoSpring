@@ -1,7 +1,6 @@
 package com.ilramlima.projetoSpring.config;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.ilramlima.projetoSpring.entities.Categoria;
+import com.ilramlima.projetoSpring.entities.ItemDoPedido;
 import com.ilramlima.projetoSpring.entities.Pedido;
 import com.ilramlima.projetoSpring.entities.Produto;
 import com.ilramlima.projetoSpring.entities.Usuario;
 import com.ilramlima.projetoSpring.entities.enums.StatusPedido;
 import com.ilramlima.projetoSpring.repository.CategoriaRepository;
+import com.ilramlima.projetoSpring.repository.ItemDoPedidoRepository;
 import com.ilramlima.projetoSpring.repository.PedidoRepository;
 import com.ilramlima.projetoSpring.repository.ProdutoRepository;
 import com.ilramlima.projetoSpring.repository.UsuarioRepository;
@@ -34,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ItemDoPedidoRepository ItemDoPedidoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,5 +73,12 @@ public class TestConfig implements CommandLineRunner{
 		p5.getCategorias().add(cat2);
 		
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
+		ItemDoPedido oi1 = new ItemDoPedido(o1, p1, 2, p1.getPreco());
+		ItemDoPedido oi2 = new ItemDoPedido(o1, p3, 1, p3.getPreco());
+		ItemDoPedido oi3 = new ItemDoPedido(o2, p3, 2, p3.getPreco());
+		ItemDoPedido oi4 = new ItemDoPedido(o3, p5, 2, p5.getPreco());
+		
+		ItemDoPedidoRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	}
 }

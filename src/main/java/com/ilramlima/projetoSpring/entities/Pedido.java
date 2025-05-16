@@ -2,21 +2,19 @@ package com.ilramlima.projetoSpring.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
-
-import org.hibernate.annotations.IdGeneratorType;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
 import com.ilramlima.projetoSpring.entities.enums.StatusPedido;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,6 +36,9 @@ public class Pedido implements Serializable{
 	@JoinColumn(name = "cliente_id")
 	private Usuario cliente;
 
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<ItemDoPedido> itens = new HashSet<>();
+	
 	public Pedido() {};
 	
 	public Pedido(Long id, Instant dataPedido, StatusPedido statusDoPedido, Usuario cliente) {
@@ -80,6 +81,10 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
+	public Set<ItemDoPedido> getItens(){
+		return itens;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(cliente);
