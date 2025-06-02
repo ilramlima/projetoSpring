@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.ilramlima.projetoSpring.entities.Categoria;
 import com.ilramlima.projetoSpring.entities.ItemDoPedido;
+import com.ilramlima.projetoSpring.entities.Pagamento;
 import com.ilramlima.projetoSpring.entities.Pedido;
 import com.ilramlima.projetoSpring.entities.Produto;
 import com.ilramlima.projetoSpring.entities.Usuario;
@@ -24,6 +25,7 @@ import com.ilramlima.projetoSpring.repository.UsuarioRepository;
 @Profile("test")
 public class TestConfig implements CommandLineRunner{
 
+	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	
@@ -80,5 +82,10 @@ public class TestConfig implements CommandLineRunner{
 		ItemDoPedido oi4 = new ItemDoPedido(o3, p5, 2, p5.getPreco());
 		
 		ItemDoPedidoRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
+		Pagamento pagamento1 = new Pagamento(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPagamento(pagamento1);
+		
+		pedidoRepository.save(o1);
 	}
 }
