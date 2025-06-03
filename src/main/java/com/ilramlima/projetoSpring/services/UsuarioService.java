@@ -15,6 +15,12 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
+	
+	public void deletarUsuario(Long id) {
+		
+		repository.deleteById(id);
+	}
+	
 	public Usuario inserirUsuario(Usuario usuario) {
 		
 		return repository.save(usuario);
