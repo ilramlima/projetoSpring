@@ -15,6 +15,10 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
+	public Usuario inserirUsuario(Usuario usuario) {
+		
+		return repository.save(usuario);
+	}
 	
 	public List<Usuario> buscarTodos(){
 		
