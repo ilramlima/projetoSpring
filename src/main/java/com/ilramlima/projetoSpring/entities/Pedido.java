@@ -42,6 +42,7 @@ public class Pedido implements Serializable{
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemDoPedido> itens = new HashSet<>();
 	
+	
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private Pagamento pagamento;
 	
@@ -55,7 +56,21 @@ public class Pedido implements Serializable{
 		setStatusDoPedido(statusDoPedido);
 		this.cliente = cliente;
 	}
+	
+	
+	public Double getTotal() {
+		
+		double soma = 0.0;
+		
+		for(ItemDoPedido xDoPedido : itens) {
+			
+			soma = soma + xDoPedido.getSubTotal();
+		}
+		
+		return soma;
+	}
 
+	
 	public Long getId() {
 		return id;
 	}

@@ -51,15 +51,15 @@ public class TestConfig implements CommandLineRunner{
 		Pedido o2 = new Pedido(null, Instant.parse("2019-07-21T03:42:10Z"), StatusPedido.AGUARDANDO_PAGAMENTO, u2);
 		Pedido o3 = new Pedido(null, Instant.parse("2019-07-22T15:21:22Z"), StatusPedido.AGUARDANDO_PAGAMENTO, u1);
 		
-		Categoria cat2 = new Categoria(null, "Books");
-		Categoria cat3 = new Categoria(null, "Computers");
-		Categoria cat1 = new Categoria(null, "Electronics");
+		Categoria cat2 = new Categoria(null, "Livros");
+		Categoria cat3 = new Categoria(null, "Computadores");
+		Categoria cat1 = new Categoria(null, "Electronicos");
 		
-		Produto p1 = new Produto(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
-		Produto p2 = new Produto(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
-		Produto p3 = new Produto(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
-		Produto p4 = new Produto(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
-		Produto p5 = new Produto(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		Produto p1 = new Produto(null, "O Senhor dos Anéis", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Produto p2 = new Produto(null, "Smart TV", "Encontre sua Smart TV ideal com descontos incríveis!", 2190.0, "");
+		Produto p3 = new Produto(null, "Macbook Pro", "O MacBook Pro é um notebook topo de linha da Apple.", 1250.0, "");
+		Produto p4 = new Produto(null, "PC Gamer", "Jogue sem limites com os PCs Gamer.", 1200.0, "");
+		Produto p5 = new Produto(null, "Scrum na Prática Para Produção de Conteúdo", "O segredo para dominar a arte de criar mais em menos tempo.", 100.99, "");
 		
 		
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
