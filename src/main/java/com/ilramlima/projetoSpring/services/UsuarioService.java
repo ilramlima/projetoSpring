@@ -15,6 +15,16 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 	
+	public Usuario atualizar(Long id, Usuario usuario) {
+		
+		Usuario pessoa = repository.getReferenceById(id);
+		
+		pessoa.setNome(usuario.getNome());
+		pessoa.setEmail(usuario.getEmail());
+		pessoa.setTelefone(usuario.getTelefone());
+		
+		return repository.save(pessoa);
+	}
 	
 	public void deletarUsuario(Long id) {
 		
