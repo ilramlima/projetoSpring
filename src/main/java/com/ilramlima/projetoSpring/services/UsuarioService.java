@@ -4,10 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.ilramlima.projetoSpring.entities.Usuario;
 import com.ilramlima.projetoSpring.repository.UsuarioRepository;
+import com.ilramlima.projetoSpring.services.exceptions.DatabaseException;
+import com.ilramlima.projetoSpring.services.exceptions.ResourceNotFoundException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UsuarioService {
@@ -19,16 +25,30 @@ public class UsuarioService {
 		
 		Usuario pessoa = repository.getReferenceById(id);
 		
-		pessoa.setNome(usuario.getNome());
-		pessoa.setEmail(usuario.getEmail());
-		pessoa.setTelefone(usuario.getTelefone());
-		
-		return repository.save(pessoa);
+		try {
+			
+			pessoa.setNome(usuario.getNome());
+			pessoa.setEmail(usuario.getEmail());
+			pessoa.setTelefone(usuario.getTelefone());
+			
+			return repository.save(pessoa);
+			
+		} catch (EntityNotFoundException e) {
+			
+			throw new ResourceNotFoundException(id);
+		}
 	}
 	
 	public void deletarUsuario(Long id) {
 		
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
+		
 	}
 	
 	public Usuario inserirUsuario(Usuario usuario) {
@@ -48,6 +68,6 @@ public class UsuarioService {
 		
 		Optional<Usuario> usuario = repository.findById(id);
 		
-		return usuario.get();
+		return usuario.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 }
